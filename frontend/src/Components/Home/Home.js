@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
-  const temp = [
-    { Name: "blabla", age: 20 },
-    { Name: "clacla", age: 21 },
-    { Name: "dladla", age: 22 },
-    { Name: "elaela", age: 23 },
-    { Name: "flafla", age: 24 },
-  ];
+  const [temp, setTemp] = useState([]);
+
+  useEffect(() => {
+    async function getRecord() {
+      const response = await fetch("http://localhost:5000/record");
+      if (!response.ok) {
+        window.alert(response.statusText);
+        return;
+      }
+
+      const records = await response.json();
+      setTemp(records);
+    }
+    getRecord();
+    // console.log(temp);
+    return;
+  }, [temp.length]);
 
   return (
     <div className="p-5 m-2">
       {temp.map((item) => {
         return (
-          <Link to={`/home/${item.Name}`}>
+          <Link to={`/home/${item._id}`} key={item._id} style={{ textDecoration: 'none' }}>
             <div className="card m-3 p-2 bg-dark text-white" >
-              <div className="card-body" key={item.age}>{item.Name}</div>
+              {item.Title}<br/>
+              {item.Desc}<br/>
+              {item.Points}<br/>
+              {item.level}<br/>
             </div>
           </Link>
         );
