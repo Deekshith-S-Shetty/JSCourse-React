@@ -21,12 +21,12 @@ recordRoutes.route("/record").get(async function (req, res) {
   }
 });
 
-recordRoutes.route("/record/one").get(function (req, res) {
+recordRoutes.route("/record/:id").get(function (req, res) {
   let db_connect = dbo.getDb();
   try {
     db_connect
       .collection("questions")
-      .findOne({ _id: new ObjectId("6460e18c75d7dccd38e7db35") })
+      .findOne({ _id: new ObjectId(req.params.id) })
       .then((response) => {
         res.send(response);
       });

@@ -21,16 +21,3 @@ app.listen(port, async () => {
   });
   console.log(`Server is running on port: ${port}`);
 });
-
-// const express = require("express")
-// const app = express()
-// const cors = require("cors")
-// const questions = require("./api/questions.route.js")
-
-// app.use(cors())
-// app.use(express.json())
-
-// app.use("/api/v1/questions", questions)
-// app.use("*", (req, res) => res.status(404).json({error: "page not found"}))
-
-// module.exports = app
